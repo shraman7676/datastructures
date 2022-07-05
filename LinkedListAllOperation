@@ -1,0 +1,132 @@
+// all link list basic programs
+//by Aman-Aot
+#include <bits/stdc++.h>
+using namespace std;
+
+//creating single linked list data structure
+class node
+{
+    public:
+    node* next;
+    int val;
+    node(int data)
+    {
+        next=NULL;
+        val=data;
+    }
+};
+
+//insertion at end
+void insertion(node* &head,int val)
+{
+    node* n=new node(val);
+    if(head==NULL)
+    {
+        head=n;
+        return;
+    }
+    node* temp=head;
+    while(temp->next!=NULL)
+    {
+        temp=temp->next;
+    }
+    temp->next=n;
+    
+}
+
+//printing the elements
+void show(node* &heads)
+{
+    node* head=heads;
+    while(head!=NULL)
+    {
+        cout<<head->val<<"->";
+        head=head->next;
+    }
+    cout<<"NULL";
+}
+
+//insertion at head
+void insertathead(node* &head,int val)
+{
+    node *n =new node(val);
+    if(head==NULL)
+    {
+        head=n;
+        return;
+    }
+    n->next=head;
+    head=n;
+}
+//searching for element in singly linked list
+void search(node* &head,int key)
+{
+    if(head==NULL)
+    {
+        cout<<"list is empty";
+        return ;
+    }
+    node* temp=head;
+    while(temp!=NULL)
+    {
+        if(temp->val==key)
+        {
+            cout<<"element found";
+            return;
+        }
+        temp=temp->next;
+    }
+    cout<<"element not found";
+}
+//deleting a node from linked list
+void deletion(node* &head,int key)
+{
+    node* temp=head;
+    if(head->val==key)
+    {
+        head=temp->next;
+    }
+    while(temp->next->val!=key)
+    {
+        temp=temp->next;
+    }
+    temp->next=temp->next->next;
+    
+}
+//reverse a singly linked list
+node* reverse(node* &head)
+{
+    node* curr=head;
+    node* prev=NULL;
+    node* nextp;
+    while(curr!=NULL)
+    {
+        //storing next data as temp to avoid its loss
+        nextp=curr->next;
+        //changing pointer of our current
+        curr->next=prev;
+        //swapping values
+        prev=curr;
+        curr=nextp;
+        
+        
+    }
+    return prev;
+}
+
+
+int main() {
+    node* root=NULL;
+    insertion(root,1);
+    insertion(root,2);
+    insertion(root,3);
+    insertathead(root,4);
+    insertathead(root,5);
+    show(root);
+    deletion(root,3);
+    search(root,7);
+    node* newroot=reverse(root);
+    show(newroot);
+
+    return 0;
+}
