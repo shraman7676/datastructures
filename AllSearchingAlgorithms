@@ -1,0 +1,81 @@
+#include<bits/stdc++.h>
+using namespace std;
+//iterative linear search;
+int linearSearch(vector<int> arr,int val,int n)
+{
+    for(int i=0;i<n;i++)
+    {
+        if(val==arr[i])
+        {
+            return i;
+        }
+    }
+}
+//recursive linear search
+int reclinearSearch(vector<int> arr,int val,int n)
+{
+    if(n<0)
+    {
+        return -1;
+    }
+    if(val==arr[n])
+    {
+        return n;
+    }
+    return reclinearSearch(arr,val,n-1);
+    
+}
+//iterative binary search
+int binarySearch(vector<int> arr,int key,int size)
+{
+    int l=0;
+    int r=size;
+    while(l<=r)
+    {
+        int mid=(l+r)/2;
+        if(arr[mid]==key)
+        {
+            return mid;
+        }
+        else if(arr[mid]>key)
+        {
+            r=mid-1;
+        }
+        else
+        {
+            l=mid+1;   
+        }
+    }
+    return -1;
+}
+//recursive binary search
+int recBinarySearch(vector<int> arr,int l,int r,int key)
+{
+    int mid;
+    if(l>r)
+        return -1;
+    if(l<=r){
+        
+        mid=(l+r)/2;
+    
+    if(arr[mid]==key)
+    {
+        return mid;
+    }
+    else if(arr[mid]>key)
+    {
+        return recBinarySearch(arr,l,mid-1,key);
+    }
+        return recBinarySearch(arr,mid+1,r,key);
+    }
+   
+}
+int main()
+{
+    vector<int> arr={1,2,3,4,5,6,7};
+   cout<<linearSearch(arr,3,7);
+    cout<<reclinearSearch(arr,8,7);
+    cout<<binarySearch(arr,8,7);
+    cout<<recBinarySearch(arr,0,7,8);
+    
+}
